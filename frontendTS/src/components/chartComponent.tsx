@@ -24,6 +24,10 @@ const chartConfig = {
     label: "Temperature",
     color: "hsl(var(--chart-1))",
   },
+  datetime:{
+    label: "Datetime",
+    color: "hsl(var(--chart-2))",
+  },
 } satisfies ChartConfig;
 
 export function ChartComponent() {
@@ -58,7 +62,7 @@ export function ChartComponent() {
           }
 
           setData((prevData) => {
-            const updatedData = [newData, ...prevData].slice();
+            const updatedData = [newData, ...prevData].slice(0,12);
             return updatedData;
           });
         });
@@ -68,10 +72,13 @@ export function ChartComponent() {
 
     const intervalId = setInterval(fetchData, 10000);
 
+
     return () => {
       clearInterval(intervalId);
     };
   }, []);
+
+  
 
   return (
     <Card>
@@ -108,6 +115,7 @@ export function ChartComponent() {
               angle={-45}
               textAnchor="end"
               height={60}
+              reversed={true}
             />
             <YAxis
               label={{
@@ -115,18 +123,19 @@ export function ChartComponent() {
                 angle: -90,
                 position: "insideLeft",
               }}
-              domain={[Math.min(...data.map((item) => item.value)), "dataMax"]}
+              domain={[ 'dataMin - 0.1', 'dataMax + 0.1']}
             />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={<ChartTooltipContent hideLabel/>}
             />
             <Line
               dataKey="temperature"
-              type="linear"
+              type="monotone"
               stroke="var(--color-temperature)"
               strokeWidth={2}
               dot={false}
+              isAnimationActive={false}
             />
           </LineChart>
         </ChartContainer>
