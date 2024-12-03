@@ -57,7 +57,7 @@ export function ChartComponent() {
             };
           }
           setData((prevData) => {
-            const updatedData = [newData, ...prevData].slice(0, 12);
+            const updatedData = [newData, ...prevData].slice(0, 6);
             return updatedData;
           });
         });
@@ -115,7 +115,7 @@ export function ChartComponent() {
                 angle: -90,
                 position: "insideLeft",
               }}
-              domain={["dataMin - 0.1", "dataMax + 0.1"]}
+              domain={["dataMin - 0.5", "dataMax + 0.5"]}
             />
             <ChartTooltip
               cursor={false}
