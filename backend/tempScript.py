@@ -26,12 +26,16 @@ def get_temperature_and_datetime():
         return jsonify({'error': str(e)}), 500
 
 threshold_temperature = 40  
+manual_fan_state = False
 
 def control_fan(temperature):
-    if temperature >= threshold_temperature:
-        subprocess.run(["set_pwm_fan_m", "255"]) 
+    if manual_fan_state:
+        subprocess.run(["set_pwm_fan_m", "255"])
     else:
-        subprocess.run(["set_pwm_fan_m", "0"])
+        if temperature >= threshold_temperature:
+            subprocess.run(["set_pwm_fan_m", "255"]) 
+        else:
+            subprocess.run(["set_pwm_fan_m", "0"])
 
 if __name__ == '__main__':
     app.run(host='192.168.15.186', port=3334)
