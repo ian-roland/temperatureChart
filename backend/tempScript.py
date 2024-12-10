@@ -6,6 +6,8 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
+manual_fan_state = False
+
 @app.route('/temperature_and_datetime')
 def get_temperature_and_datetime():
     try:
@@ -25,8 +27,13 @@ def get_temperature_and_datetime():
     except Exception as e:  # Catch any unexpected errors
         return jsonify({'error': str(e)}), 500
 
+@app.route('/toggle_manual_fan', methods=['POST'])
+def toggle_manual_fan():
+    global manual_fan_state
+    manual_fan_state = not manual_fan_state
+    return jsonify({'message': 'Manual fan state toggled'})
+
 threshold_temperature = 40  
-manual_fan_state = False
 
 def control_fan(temperature):
     if manual_fan_state:
