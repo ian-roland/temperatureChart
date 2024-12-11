@@ -6,12 +6,12 @@ from datetime import datetime
 app = Flask(__name__)
 CORS(app)
 
-manual_fan_state = False
+
 
 @app.route('/temperature_and_datetime')
 def get_temperature_and_datetime():
     try:
-     
+    
         try:
             result = subprocess.run(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE, check=True)
             output = result.stdout.decode('utf-8').strip()
@@ -33,6 +33,7 @@ def toggle_manual_fan():
     manual_fan_state = not manual_fan_state
     return jsonify({'message': 'Manual fan state toggled'})
 
+manual_fan_state = False
 threshold_temperature = 40  
 
 def control_fan(temperature):
@@ -46,6 +47,6 @@ def control_fan(temperature):
                 subprocess.run(["set_pwm_fan_m", "0"])
     except subprocess.CalledProcessError as e:
         print(f"Error controlling fan: {e}")
-        
+
 if __name__ == '__main__':
     app.run(host='192.168.15.186', port=3334)
