@@ -6,7 +6,7 @@ export function ButtonOutline() {
 
   const toogleFan = () => {
     setFanState(!fanState);
-    fetch("/toggle_manual_fan", { method: "POST" })
+    fetch("http://192.168.15.186:3334/toggle_manual_fan", { method: "POST" })
       .then((response) => response.json())
       .then((data) => console.log(data))
       .catch((error) => console.error("Error toggling fan:", error));
