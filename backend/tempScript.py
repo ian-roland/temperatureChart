@@ -30,12 +30,10 @@ def get_temperature_and_datetime():
     
         try:
             result = subprocess.run(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE, check=True)
-            print(result)
             output = result.stdout.decode('utf-8').strip()
-            print(output)
             temperature = float(output.split('=')[1].strip("'C"))
             print(temperature)
-            control_
+            control_fan(temperature)
         except subprocess.CalledProcessError:
             temperature = None  # Indicate temperature unavailable
 
