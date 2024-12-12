@@ -7,17 +7,20 @@ app = Flask(__name__)
 CORS(app)
 
 manual_fan_state = False
-threshold_temperature = 40  
+threshold_temperature = 50
 
 def control_fan(temperature):
     try:
         if manual_fan_state:
-            subprocess.run(["set_pwm_fan_m", "255"])
+            subprocess.run(["i2cset -y 10 0x2f 0x30 0xff"])
+            print("Fan Turned ON => control_fan(temperature), manual_fan_state")
         else:
             if temperature >= threshold_temperature:
-                subprocess.run(["set_pwm_fan_m", "255"]) 
+                subprocess.run(["i2cset -y 10 0x2f 0x30 0xff"]) 
+                print("Fan Turned ON => control_fan(temperature), temperature >= threshold_temperature")
             else:
-                subprocess.run(["set_pwm_fan_m", "0"])
+                subprocess.run(["i2cset -y 10 0x2f 0x30 0x00"])
+                print("Fan Turned OFF => control_fan(temperature), temperature < threshold_temperature")
     except subprocess.CalledProcessError as e:
         print(f"Error controlling fan: {e}")
 
@@ -27,6 +30,7 @@ def get_temperature_and_datetime():
     
         try:
             result = subprocess.run(['vcgencmd', 'measure_temp'], stdout=subprocess.PIPE, check=True)
+            print(result)
             output = result.stdout.decode('utf-8').strip()
             temperature = float(output.split('=')[1].strip("'C"))
         except subprocess.CalledProcessError:
