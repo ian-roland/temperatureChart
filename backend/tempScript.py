@@ -18,9 +18,11 @@ def control_fan(temperature):
             if temperature >= threshold_temperature:
                 subprocess.run(["i2cset", "-y", "10", "0x2f", "0x30", "0xff"]) 
                 print("Fan Turned ON => control_fan(temperature), temperature >= threshold_temperature")
+                toggle_manual_fan()
             else:
                 subprocess.run(["i2cset", "-y", "10", "0x2f", "0x30", "0x00"])
                 print("Fan Turned OFF => control_fan(temperature), temperature < threshold_temperature")
+                toggle_manual_fan()
     except subprocess.CalledProcessError as e:
         print(f"Error controlling fan: {e}")
 
