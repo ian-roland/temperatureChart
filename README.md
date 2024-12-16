@@ -65,4 +65,10 @@ This is a webapp focused on tracking the Temperature of a computer that runs lin
    ➜  Network: http://192.168.15.48:5173/
   ```
 
+## Additional Configs
+  * You can change the temperature threshold that automatically toggle the fan on/off in the flask API by changing this line in the tempScript.py:	
+  ```sh
+     threshold_temperature = 50
+  ```
+
 ---
