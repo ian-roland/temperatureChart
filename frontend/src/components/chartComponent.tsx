@@ -36,7 +36,7 @@ export function ChartComponent() {
 
   useEffect(() => {
     const fetchData = () => {
-      fetch("http://192.168.15.186:3334/temperature_and_datetime")
+      fetch("http://192.168.15.178:3334/temperature_and_datetime")
         .then((res) => {
           return res.json();
         })
