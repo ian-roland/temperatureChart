@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 manual_fan_state = False
-threshold_temperature = 50
+threshold_temperature = 90
 
 def control_fan(temperature):
     try:
@@ -53,4 +53,4 @@ def toggle_manual_fan():
     return jsonify({'message': 'Manual fan state toggled'})
 
 if __name__ == '__main__':
-    app.run(host='192.168.15.186', port=3334)
+    app.run(host='192.168.15.178', port=3334)
