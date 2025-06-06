@@ -15,15 +15,13 @@ This is a webapp focused on tracking the Temperature of a computer that runs lin
 
 ## Tools 🔧
 ### Back-end
-- [NodeJS](https://nodejs.org/en)
-- [Fastify](https://fastify.dev/)
-- [Prisma](https://www.prisma.io/)
+- [Flask](https://flask.palletsprojects.com/en/stable/)
+- [Python](https://www.python.org/)
 
 ### Front-end
 - [ReactJS](https://react.dev/)
 - [ViteJS](https://vitejs.dev/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [DayJS](https://day.js.org/)
 - [Typescript](https://www.typescriptlang.org/)
 
 ## Getting Started

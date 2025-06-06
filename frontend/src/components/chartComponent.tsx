@@ -134,7 +134,7 @@ export function ChartComponent() {
       </CardContent>
       <CardFooter className="flex-col items-start gap-2 text-sm">
         <div className="flex gap-2 font-medium leading-none">
-          Data fetched from 192.168.15.186:3334/temperature_and_datetime{" "}
+          Data fetched from 192.168.15.178:3334/temperature_and_datetime{" "}
           <TrendingUp className="h-4 w-4" />
         </div>
       </CardFooter>
